@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JSpinner;
@@ -35,7 +36,8 @@ public class PhysicsTimerGUI extends JFrame implements ActionListener {
 	private long endTime;
 	
 	private JMenuBar menuBar;
-	private JMenu mode;
+	private JMenu mode, about;
+	private JMenuItem aboutVersion;
 	private JRadioButtonMenuItem modeContinuous, modeStartStop;
 	
 	private ButtonGroup modes;
@@ -65,7 +67,13 @@ public class PhysicsTimerGUI extends JFrame implements ActionListener {
 		modes.add(modeContinuous);
 		mode.add(modeContinuous);
 		
+		about = new JMenu("About");
+		
+		aboutVersion = new JMenuItem("Version: 1.0.1");
+		about.add(aboutVersion);
+		
 		menuBar.add(mode);
+		menuBar.add(about);
 		
 		//Create Content
 		content = new JPanel(new GridBagLayout());
