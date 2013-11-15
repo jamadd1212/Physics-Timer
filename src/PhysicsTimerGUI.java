@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -24,7 +25,7 @@ import javax.swing.SpinnerNumberModel;
  * 
  * @author James Madden
  * @since November 14, 2013
- * @version 1.0.0
+ * @version 1.0.1
  *
  */
 public class PhysicsTimerGUI extends JFrame implements ActionListener {
@@ -71,16 +72,16 @@ public class PhysicsTimerGUI extends JFrame implements ActionListener {
 		content = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
-		String s_description = "<html>This program calculates the "
-				             + "<sup>rad</sup>&frasl;<sub>s</sub> from a timed "
-				             + "number of revolutions</html>";
+		String s_description = "This program calculates the "
+				             + "[rad/s] from a timed "
+				             + "number of revolutions";
 		
 		title = new JLabel("Physics Timer");
 		title.setFont(title.getFont().deriveFont(40.0f));
 		c.gridx = 0;
 		c.gridy = 0;
 		c.ipady = 5;
-		c.anchor = GridBagConstraints.PAGE_END;
+		c.anchor = GridBagConstraints.CENTER;
 		c.insets = new Insets(20,5,5,5);
 		c.gridwidth = 4;
 		content.add(title, c);
@@ -107,7 +108,7 @@ public class PhysicsTimerGUI extends JFrame implements ActionListener {
 		revolutions.setFont(title.getFont().deriveFont(20.0f));
 		c.gridx = 1;
 		c.gridy = 2;
-		c.ipady = 0;
+		c.ipady = 13;
 		c.weightx = .4;
 		c.anchor = GridBagConstraints.LINE_START;
 		content.add(revolutions, c); 
@@ -115,14 +116,15 @@ public class PhysicsTimerGUI extends JFrame implements ActionListener {
 		output = new JTextField("--");
 		output.setFont(title.getFont().deriveFont(30.0f));
 		output.setHorizontalAlignment(JTextField.CENTER);
+		output.setMinimumSize(output.getPreferredSize());
 		c.gridx = 2;
 		c.gridy = 2;
-		c.ipady = 5;
-		c.ipadx = 5;
+		c.ipady = 0;
+		c.ipadx = 8;
 		c.anchor = GridBagConstraints.LINE_END;
 		content.add(output, c);
 		
-		units = new JLabel("<html><sup>rad</sup>&frasl;<sub>s</sub></html>");
+		units = new JLabel("[rad/s]");
 		units.setFont(title.getFont().deriveFont(20.0f));
 		c.gridx = 3;
 		c.gridy = 2;
@@ -140,7 +142,7 @@ public class PhysicsTimerGUI extends JFrame implements ActionListener {
 		button.setBackground(new Color(0x98CC98));
 		c.gridx = 0;
 		c.gridy = 3;
-		c.ipady = 400;
+		c.ipady = 350;
 		c.ipadx = 600;
 		c.gridwidth = 4;
 		c.weighty = 1;
@@ -168,6 +170,7 @@ public class PhysicsTimerGUI extends JFrame implements ActionListener {
 		output.setText(String.valueOf(answer));
 		revalidate();
 		repaint();
+		output.setMinimumSize(output.getPreferredSize());
 	}
 	
 	@Override
@@ -192,11 +195,12 @@ public class PhysicsTimerGUI extends JFrame implements ActionListener {
 		}
 		
 		if(event.getSource().equals(modeContinuous)){
-			button.setText("Lap");
+			button.setText("Time");
 			button.setBackground(new Color(0x63A5EC));
 			button.setName("continuous");
 			output.setText("--");
 			endTime = System.currentTimeMillis();
+			output.setMinimumSize(output.getPreferredSize());
 		}
 		
 		if(event.getSource().equals(modeStartStop)){
@@ -204,6 +208,7 @@ public class PhysicsTimerGUI extends JFrame implements ActionListener {
 			button.setBackground(new Color(0x98CC98));
 			button.setName("start");
 			output.setText("--");
+			output.setMinimumSize(output.getPreferredSize());
 		}
 		
 	}
